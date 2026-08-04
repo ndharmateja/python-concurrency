@@ -7,7 +7,8 @@ from utils import fn, print_countdown, print_duration
 print()
 print("5 threads with thread pool executor")
 
-t = Thread(target=print_countdown, args=[8], daemon=True)
+# daemon => thread stops when main thread stops
+t = Thread(target=print_countdown, daemon=True)
 t.start()
 
 start = time.perf_counter_ns()

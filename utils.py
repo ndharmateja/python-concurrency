@@ -14,11 +14,12 @@ def fn(seconds=1):
     time.sleep(seconds)
     print("Sleeping done")
 
-def print_countdown(t):
-    for i in range(t):
+def print_countdown():
+    i = 0
+    while True:
         print(f"{i}s")
+        i += 1
         time.sleep(1)
-    print(f"{t}s")
 
 def create_folder_if_not_exists(folder_path: str | Path) -> None:
     """Creates a folder (and any missing parent directories) if it doesn't exist."""
