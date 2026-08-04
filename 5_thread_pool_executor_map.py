@@ -1,7 +1,7 @@
 import time
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
-from utils import fn, print_countdown, print_duration
+from utils import fn2, print_countdown, print_duration
 
 # 5 threads with thread pool executor
 print()
@@ -16,7 +16,7 @@ with ThreadPoolExecutor() as executor:
     # map would wait for all the threads to join
     # (even without the next for loop)
     durations = [3, 9, 6, 4]
-    results = executor.map(fn, durations)
+    results = executor.map(fn2, durations)
 
     # this will iterate in order of function beginnings
     for result in results:

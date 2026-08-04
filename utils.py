@@ -12,7 +12,12 @@ def print_duration(start, finish):
 def fn(seconds=1):
     print(f"Sleeping {seconds} sec")
     time.sleep(seconds)
-    print("Sleeping done")
+    print(f"Sleeping {seconds} sec done")
+
+def fn2(seconds=1):
+    print(f"Sleeping {seconds} sec")
+    time.sleep(seconds)
+    return f"Sleeping {seconds} sec done"
 
 def print_countdown():
     i = 0
