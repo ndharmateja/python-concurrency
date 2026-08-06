@@ -10,7 +10,7 @@ start = time.perf_counter_ns()
 with ThreadPoolExecutor() as executor:
     f1 = executor.submit(fn, 3)
     f2 = executor.submit(fn, 1)
-    print(f2.result())
     print(f1.result())
+    print(f2.result())
 finish = time.perf_counter_ns()
 print_duration(start, finish)
