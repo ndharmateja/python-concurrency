@@ -8,6 +8,10 @@ MAX_ITEMS = 5
 data_lock = Lock()
 has_items = Condition(data_lock)
 has_space = Condition(data_lock)
+
+# This queue need not be thread-safe as our lock (which we are using along
+# with the CV ensures that the enqueue() and dequeue() are atomic and that only
+# one of them would be called at any point of time)
 queue = Queue(MAX_ITEMS)
 
 def producer(producer_id):
