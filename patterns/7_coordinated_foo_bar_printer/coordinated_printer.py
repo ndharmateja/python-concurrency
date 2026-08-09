@@ -6,8 +6,8 @@ from threading import Semaphore
 
 # Think of this problem as the bounded buffer problem (producer-consumer)
 # with just one slot in the buffer where
-# a producer putting an item in the buffer as printing "Foo"
-# a consumer consuming an item from the buffer as printing "Bar"
+# a producer putting an item in the buffer     <=> printing "Foo"
+# a consumer consuming an item from the buffer <=> printing "Bar"
 # Now it is the OSTEP textbook solution of the producer consumer problem
 # with one buffer slot using semaphores and we don't need any locks here
 # as there isn't any state we are updating which means no critical sections
