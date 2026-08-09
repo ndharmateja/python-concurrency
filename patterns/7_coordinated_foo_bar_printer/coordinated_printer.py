@@ -1,6 +1,6 @@
 from threading import Semaphore
 
-# Very similar to 6a but with 2 systems
+# Very similar to problem 6 but with 2 systems
 # so we could use semaphores to solve this problem
 class CoordinatedPrinter:
     def __init__(self, n):

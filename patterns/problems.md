@@ -93,7 +93,28 @@ Solve the classical Dining Philosophers synchronization problem for $N$ philosop
 
 ---
 
-### Problem 6: Thread Coordinated Printing (Print FooBar Alternately)
+### Problem 6: Multi-Subsystem Ordered Log Processor
+
+Synchronize three independent worker threads representing different subsystems ($A$, $B$, and $C$) to output their respective logs in a strict, deterministic round-robin order ($A \rightarrow B \rightarrow C \rightarrow A \dots$) for $K$ iterations.
+
+#### Interface
+
+* Thread 1 runs `printFirst(log_a)` to process Subsystem $A$.
+* Thread 2 runs `printSecond(log_b)` to process Subsystem $B$.
+* Thread 3 runs `printThird(log_c)` to process Subsystem $C$.
+
+#### Requirements & Invariants
+
+1. **Strict Ordering:** Output logs must follow the sequence $A \rightarrow B \rightarrow C \rightarrow A \dots$ without out-of-order interleaving.
+2. **Spurious Wakeup Prevention:** Waiting threads must re-verify their turn condition inside a predicate loop (Mesa semantics).
+3. **Targeted Signaling:** Avoid global broadcasts (`notify_all()`) if using Condition Variables to prevent unnecessary thread context switches and waking threads that cannot make progress.
+4. **Clean Termination:** All three worker threads must complete $K$ rounds without leaving un-signaled waiting threads.
+
+
+
+---
+
+### Problem 7: Thread Coordinated Printing (Print FooBar Alternately)
 
 Synchronize two independent threads so that they execute two distinct print functions in a strict, alternating sequence $N$ times.
 

@@ -2,7 +2,7 @@ from threading import Thread
 from coordinated_printer import CoordinatedPrinter
 from time import sleep
 
-# Very similar to 6a but with 2 systems
+# Very similar to problem 6 but with 2 systems
 
 def foo_worker(processor: CoordinatedPrinter):
     processor.printFoo()
