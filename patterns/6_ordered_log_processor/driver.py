@@ -5,7 +5,7 @@ from ordered_log_processor_2 import OrderedLogProcessor
 
 def worker_a(processor: OrderedLogProcessor, iterations):
     for _ in range(iterations):
-        time.sleep(random.uniform(0.1, 0.5))
+        time.sleep(random.uniform(1, 3))
         print("log line from A generated")
         processor.print_first("[A] log line")
 
@@ -18,7 +18,7 @@ def worker_b(processor: OrderedLogProcessor, iterations):
 
 def worker_c(processor: OrderedLogProcessor, iterations):
     for _ in range(iterations):
-        time.sleep(random.uniform(1, 3))
+        time.sleep(random.uniform(0.1, 0.5))
         print("log line from C generated")
         processor.print_third("[C] log line")
 
@@ -27,7 +27,7 @@ def main():
     processor = OrderedLogProcessor()
     rounds = 4 
 
-    targets = [worker_c, worker_b, worker_a]
+    targets = [worker_c, worker_a, worker_b]
     threads = []
 
     for target in targets:
