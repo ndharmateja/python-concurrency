@@ -4,6 +4,11 @@ from random import uniform
 from threading import Lock, Condition
 from queues.circular_array_queue import Queue
 
+# Launch 3 producers and 2 consumers
+NUM_PRODUCERS = 3
+NUM_CONSUMERS = 2
+NUM_PRODUCER_LOOPS = 6
+NUM_CONSUMER_LOOPS = (NUM_PRODUCERS * NUM_PRODUCER_LOOPS) // NUM_CONSUMERS
 MAX_ITEMS = 5
 data_lock = Lock()
 has_items = Condition(data_lock)
@@ -15,7 +20,7 @@ has_space = Condition(data_lock)
 queue = Queue(MAX_ITEMS)
 
 def producer(producer_id):
-    for i in range(6):
+    for i in range(NUM_PRODUCER_LOOPS):
         sleep(uniform(0.5, 1))
         val = f"P{producer_id}-{i}"
         with data_lock:
@@ -26,7 +31,7 @@ def producer(producer_id):
             print(f"producer {producer_id} produced {val}. Queue: {queue}")
 
 def consumer(consumer_id):
-    for _ in range(9):
+    for _ in range(NUM_CONSUMER_LOOPS):
         sleep(uniform(3, 5))
         with data_lock:
             while queue.is_empty():
@@ -36,9 +41,6 @@ def consumer(consumer_id):
             print(f"consumer {consumer_id} consumed {val}. Queue: {queue}")
 
 def main():
-    # Launch 3 producers and 2 consumers
-    NUM_PRODUCERS = 3
-    NUM_CONSUMERS = 2
     with ThreadPoolExecutor() as executor:
         producer_futures = [ executor.submit(producer, id) for id in range(NUM_PRODUCERS) ]
         consumer_futures = [ executor.submit(consumer, id) for id in range(NUM_CONSUMERS) ]

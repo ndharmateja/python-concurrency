@@ -4,6 +4,11 @@ from random import uniform
 from threading import Semaphore
 from queues.circular_array_queue_thread_safe import Queue
 
+# Launch 4 producers and 3 consumers
+NUM_PRODUCERS = 4
+NUM_CONSUMERS = 3
+NUM_PRODUCER_LOOPS = 6
+NUM_CONSUMER_LOOPS = (NUM_PRODUCERS * NUM_PRODUCER_LOOPS) // NUM_CONSUMERS
 MAX_ITEMS = 5
 queue = Queue(MAX_ITEMS)
 has_space = Semaphore(MAX_ITEMS)
@@ -16,7 +21,7 @@ has_items = Semaphore(0)
 # and the print statement are atomic
 
 def producer(producer_id):
-    for i in range(6):
+    for i in range(NUM_PRODUCER_LOOPS):
         sleep(uniform(0.5, 1))
         val = f"P{producer_id}-{i}"
         has_space.acquire()
@@ -25,7 +30,7 @@ def producer(producer_id):
         has_items.release()
 
 def consumer(consumer_id):
-    for _ in range(8):
+    for _ in range(NUM_CONSUMER_LOOPS):
         sleep(uniform(3, 5))
         has_items.acquire()
         val = queue.dequeue()
@@ -33,9 +38,6 @@ def consumer(consumer_id):
         has_space.release()
 
 def main():
-    # Launch 3 producers and 2 consumers
-    NUM_PRODUCERS = 4
-    NUM_CONSUMERS = 3
     with ThreadPoolExecutor() as executor:
         producer_futures = [ executor.submit(producer, id) for id in range(NUM_PRODUCERS) ]
         consumer_futures = [ executor.submit(consumer, id) for id in range(NUM_CONSUMERS) ]
