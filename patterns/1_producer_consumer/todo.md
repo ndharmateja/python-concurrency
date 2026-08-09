@@ -1,0 +1,1 @@
+1. circular array queue with 2 locks as enqueue() won't be called on a full queue and dequeue() won't be called on an empty queue.
