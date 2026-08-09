@@ -10,7 +10,7 @@ class OrderedLogProcessor:
         # 2 = Third subsystem's turn
         self.state = 0
 
-    def printFirst(self, log):
+    def print_first(self, log):
         with self.lock:
             # Wait on the CV as long as it is not the first's turn
             while self.state != 0:
@@ -24,7 +24,7 @@ class OrderedLogProcessor:
             self.state = 1
             self.cond.notify_all()
 
-    def printSecond(self, log):
+    def print_second(self, log):
         with self.lock:
             # Wait on the CV as long as it is not the second's turn
             while self.state != 1:
@@ -38,7 +38,7 @@ class OrderedLogProcessor:
             self.state = 2
             self.cond.notify_all()
 
-    def printThird(self, log):
+    def print_third(self, log):
         with self.lock:
             # Wait on the CV as long as it is not the third's turn
             while self.state != 2:

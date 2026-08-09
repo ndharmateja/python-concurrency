@@ -99,9 +99,9 @@ Synchronize three independent worker threads representing different subsystems (
 
 #### Interface
 
-* Thread 1 runs `printFirst(log_a)` to process Subsystem $A$.
-* Thread 2 runs `printSecond(log_b)` to process Subsystem $B$.
-* Thread 3 runs `printThird(log_c)` to process Subsystem $C$.
+* Thread 1 runs `print_first(log_a)` to process Subsystem $A$.
+* Thread 2 runs `print_second(log_b)` to process Subsystem $B$.
+* Thread 3 runs `print_third(log_c)` to process Subsystem $C$.
 
 #### Requirements & Invariants
 

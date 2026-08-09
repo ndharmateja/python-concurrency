@@ -7,20 +7,20 @@ def worker_a(processor: OrderedLogProcessor, iterations):
     for _ in range(iterations):
         time.sleep(random.uniform(0.1, 0.5))
         print("log line from A generated")
-        processor.printFirst("[A] log line")
+        processor.print_first("[A] log line")
 
 def worker_b(processor: OrderedLogProcessor, iterations):
     time.sleep(2)
     for _ in range(iterations):
         time.sleep(random.uniform(0.5, 1))
         print("log line from B generated")
-        processor.printSecond("[B] log line")
+        processor.print_second("[B] log line")
 
 def worker_c(processor: OrderedLogProcessor, iterations):
     for _ in range(iterations):
         time.sleep(random.uniform(1, 3))
         print("log line from C generated")
-        processor.printThird("[C] log line")
+        processor.print_third("[C] log line")
 
 
 def main():
