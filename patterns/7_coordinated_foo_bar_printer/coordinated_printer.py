@@ -1,7 +1,8 @@
 from threading import Semaphore
 
 # Very similar to problem 6 but with 2 systems
-# so we could use semaphores to solve this problem
+# so we could use semaphores to solve this problem (along with
+# the condition variable strategies used in problem 6)
 class CoordinatedPrinter:
     def __init__(self, n):
         self.n = n
