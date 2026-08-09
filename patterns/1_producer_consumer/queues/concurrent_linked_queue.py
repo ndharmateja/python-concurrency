@@ -4,7 +4,7 @@ from threading import Lock
 # two locks (see page 362 of OSTEP book) to improve concurrency
 # enqueue() at tail and dequeue() at head
 # The logic in the producer consumer (with semaphores) ensures that
-# dequeue() won't be called when the queue is empty
+# dequeue() won't be called when the queue is empty (so no need of checks)
 # and that there won't be more than MAX_ITEMS (declared in the
 # producer consumer file) enqueued at any point in time
 class _Node:
