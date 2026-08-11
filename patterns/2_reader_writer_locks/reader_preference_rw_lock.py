@@ -8,16 +8,18 @@ class ReaderPreferencRWLock:
 
     def acquire_read_lock(self):
         with self.mutex:
-            # The first reader gets hold of the write lock
+            # The first reader gets hold of the write lock (locks
+            # out writers)
             self.num_readers += 1
             if self.num_readers == 1:
                 self.write_lock.acquire()
     
     def release_read_lock(self):
         with self.mutex:
-            # The last reader lets go of the write lock
-            self.active_readers -= 1
-            if self.active_readers == 0:
+            # The last reader lets go of the write lock (lets in writers
+            # if there are any)
+            self.num_readers -= 1
+            if self.num_readers == 0:
                 self.write_lock.release()
 
     def acquire_write_lock(self):
