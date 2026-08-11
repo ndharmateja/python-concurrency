@@ -1,6 +1,6 @@
 from threading import Lock, Condition
 
-# To fix the bug from the buggy version
+# To fix the bug from the buggy version (see the buggy version first)
 # we the generation number instead of can_cross boolean flag
 # The generation would increment only when the last thread calls wait()
 # on the barrier
